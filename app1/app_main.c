@@ -120,8 +120,8 @@ static struct dio_in_info d_inputs[DIN_NUM] = {
     {
         // GPS PPS, connected to PB2 (CN10, pin 22).
         .name = "PPS",
-        .port = DIO_PORT_A,
-        .pin = DIO_PIN_8,
+        .port = DIO_PORT_B,
+        .pin = DIO_PIN_2,
         .pull = DIO_PULL_NO,
     }
 };

@@ -54,7 +54,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #define GPS_IN_BFR_SIZE 80
-#define MAX_SATS 32
+#define MAX_SATS 96
 #define CLEANUP_TMR_MS 5000
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -338,7 +338,7 @@ static void process_msg(char* msg)
                     case 0:
                         // Satellite PRN number
                         satellite_num = atoi(token);
-                        if (satellite_num < 1 || satellite_num > 32) {
+                        if (satellite_num < 1 || satellite_num > 96) {
                             log_debug("Unused satellite, number=%s\n", token);
                             parse_state = PARSE_STATE_IGNORE;
                         } else {
