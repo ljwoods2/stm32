@@ -42,6 +42,7 @@
 #include "ttys.h"
 #include "stat.h"
 #include "tmr.h"
+#include "display.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Common macros
@@ -175,6 +176,9 @@ void app_main(void)
         .sep_num_blinks = 5,
         .sep_period_ms = 200,
     };
+    struct display_cfg display_cfg = {
+        .val  = 1,
+    };
 
     //
     // Invoke the init API on modules the use it.
@@ -255,6 +259,18 @@ void app_main(void)
         INC_SAT_U16(cnts_u16[CNT_INIT_ERR]);
     }
 
+    result = display_get_def_cfg(&display_cfg);
+    if (result < 0) {
+        log_error("display_get_def_cfg error %d\n", result);
+        INC_SAT_U16(cnts_u16[CNT_INIT_ERR]);
+    } else {
+        result = display_init(&display_cfg);
+        if (result < 0) {
+            log_error("display_init error %d\n", result);
+            INC_SAT_U16(cnts_u16[CNT_INIT_ERR]);
+        }
+    }
+
     //
     // Invoke the start API on modules the use it.
     //
@@ -300,6 +316,12 @@ void app_main(void)
     result = blinky_start();
     if (result < 0) {
         log_error("blinky_start error %d\n", result);
+        INC_SAT_U16(cnts_u16[CNT_START_ERR]);
+    }
+
+    result = display_start();
+    if (result < 0) {
+        log_error("display_start error %d\n", result);
         INC_SAT_U16(cnts_u16[CNT_START_ERR]);
     }
 

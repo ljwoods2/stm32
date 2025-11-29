@@ -94,7 +94,7 @@ static enum tmr_cb_action tmr_cb(int32_t tmr_id, uint32_t user_data);
 // Private (static) variables
 ////////////////////////////////////////////////////////////////////////////////
 
-struct blinky_state state;
+static struct blinky_state state;
 
 static struct cmd_cmd_info cmds[] = {
     {

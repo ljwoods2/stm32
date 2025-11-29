@@ -15,8 +15,9 @@ set(MODULES_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/stat/stat.c
     ${CMAKE_CURRENT_SOURCE_DIR}/tmr/tmr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/ttys/ttys.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/display/display.cpp
 )
 
-add_library(modules INTERFACE ${MODULES_Src})
-target_include_directories(modules INTERFACE ${MODULES_Include_Dirs})
-target_sources(modules PUBLIC ${MODULES_Src})
+add_library(modules STATIC ${MODULES_Src})
+target_include_directories(modules PUBLIC ${MODULES_Include_Dirs})
+target_link_libraries(modules PUBLIC stm32cubemx)
